@@ -1,21 +1,21 @@
 ---
-title: Erweiterungen für meinen 2D Player Controller
+title: Extensions for my 2D Player Controller
 date: 2026-04-24 02:00:00 +0200
-lang: de
-categories: [Studium, Module, 4FSC0PD002]
+lang: en
+categories: [Studies, Modules, 4FSC0PD002]
 tags: [2D Unity, Player Controller, Unity]
 ---
 
-# Dokumentation: Erweiterter 2D Player Controller
+# Documentation: Refined 2D Player Controller
 
-## 1. Projektübersicht
-* **Projektname:** [2DLearningSAE](https://git.zetacron.de/Yuuto/sae/src/branch/master/4FSC0PD002/2DLearningSAE)
-* **Ziel:** Implementierung von Game-Feel Mechaniken zur Verbesserung des Platforming-Erlebnisses, inspiriert durch moderne Klassiker wie *Celeste*.
+## 1. Project Overview
+* **Project Name:** [2DLearningSAE](https://git.zetacron.de/Yuuto/sae/src/branch/master/4FSC0PD002/2DLearningSAE)
+* **Objective:** Implementing "Game Feel" mechanics to enhance the platforming experience.
 
 ---
 
-## 2. Alter Palyer Controller
-Der Player Controller an dem ich die verbesserungen vornehme, ist der aus dem [2DLearningSAE](https://git.zetacron.de/Yuuto/sae/src/branch/master/4FSC0PD002/2DLearningSAE) Projekt.
+## 2. Old Player Controller
+The Player Controller i am using for the refinementations is the one from my [2DLearningSAE](https://git.zetacron.de/Yuuto/sae/src/branch/master/4FSC0PD002/2DLearningSAE) project.
 
 ```cs
 using UnityEngine;
@@ -104,45 +104,45 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
 
 ```
 
-Dazu gibt es zum jetzigem stand keine Dokumentation. Vielleicht mache ich mal eine!
+For now there is now Documentation about this, maybe i'll make one someday!
 
 ---
-## 3. Implementierte Mechaniken
 
-### Mechanik 1: Coyote Time
+## 3. Implemented Mechanics
+
+### Mechanic 1: Coyote Time
 * **Inspiration:** *Super Mario*
-* **Funktionsweise:** Dem Spieler wird ein kurzes Zeitfenster (z. B. 0.1s - 0.15s) gewährt, in dem er noch springen kann, nachdem er die Kante einer Plattform verlassen hat.
-* **Einfluss auf das Spielgefühl:** Verhindert, dass der User bei knappen Sprüngen Frustriert wird.
+* **Functionality:** Provides the player with a Short-term window (e.g., 0.1s - 0.15s) to jump even after leaving the edge of a platform.
+* **Impact on Game Feel:** Prevents player frustration during frame-perfect or tight jumps.
 
-### Mechanik 2: Jump Buffering
+### Mechanic 2: Jump Buffering
 * **Inspiration:** *Hollow Knight*
-* **Funktionsweise:** Wenn die Sprungtaste kurz vor der Landung gedrückt wird, speichert das System diesen Input und führt den Sprung automatisch im Moment des Bodenkontakts aus.
-* **Einfluss auf das Spielgefühl:** Erlaubt flüssigere Kettenreaktionen und verhindert "verschluckte" Inputs bei schnellen Bewegungen.
+* **Functionality:** If the jump button is pressed shortly before hitting the ground, the system buffers the input and triggers the jump automatically upon landing.
+* **Impact on Game Feel:** Enables smoother movement chains and prevents "dropped" inputs during fast-paced gameplay.
 
-### Mechanik 3: Wall Slide & Wall Jump
+### Mechanic 3: Wall Slide & Wall Jump
 * **Inspiration:** *Celeste*
-* **Funktionsweise:** Beim Kontakt mit einer Wand in der Luft wird die Fallgeschwindigkeit reduziert (Slide). Ein Sprunginput an der Wand löst einen Kraftstoß nach oben und in die entgegengesetzte Richtung aus.
-* **Einfluss auf das Spielgefühl:** Erweitert das Leveldesign um vertikale Passagen und erhöht die Mobilität des Charakters.
+* **Functionality:** While in the air and touching a wall, falling speed is reduced (Slide). Pressing the jump button against a wall triggers a force pushing the player upward and away from the surface.
+* **Impact on Game Feel:** Expands level design possibilities with vertical sections and significantly increases character mobility.
 
 ---
 
-## 4. Technische Umsetzung & Parameter
-Die folgenden Parameter wurden im Inspector gesetzt.
+## 4. Technical Implementation & Parameters
+The following parameters were set in the Inspector.
 
-| Parameter | Beschreibung | Empfohlener Wert |
+| Parameter | Description | Recommended Value |
 | :--- | :--- | :--- |
-| `ParameterName` | Beschreibung | Wert |
-
-
----
-
-## 5. Kombination der Mechaniken
-Im Testlauf wurde besonders auf das Zusammenspiel geachtet:
+| `ParameterName` | Description | Value |
 
 ---
 
-## 6. Lösungswege
+## 5. Interaction of Mechanics
+During testing, special attention was paid to how the mechanics interact:
 
 ---
 
-## 7. Bugs & Lösungen
+## 6. Approaches & Solutions
+
+---
+
+## 7. Bugs & Troubleshooting
