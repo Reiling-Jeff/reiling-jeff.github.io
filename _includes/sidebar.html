@@ -6,16 +6,12 @@
        style="background: rgba(255, 255, 255, 0.05); border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1);">
     
     {% for lang in site.languages %}
-      {% capture target_path %}{% if lang == site.default_lang %}/{% else %}/{{ lang }}/{% endif %}{% endcapture %}
+      {% capture target_url %}{% if lang == site.default_lang %}/{% else %}/{{ lang }}/{% endif %}{% endcapture %}
       
-      {% comment %} 
-        Wir nutzen onclick, um die Weiterleitung zu erzwingen. 
-        Das href="#" ist nur für das Styling/Hover da.
-      {% endcomment %}
       <a href="javascript:void(0)" 
-         onclick="window.location.href='{{ target_path }}'"
+         onclick="window.location.href='{{ target_url }}'"
          class="text-decoration-none {% if site.active_lang == lang %}text-primary fw-bold{% else %}text-muted{% endif %}" 
-         style="font-size: 0.8rem; flex: 1; text-align: center;">
+         style="font-size: 0.8rem; flex: 1; text-align: center; cursor: pointer;">
         {{ lang | upcase }}
       </a>
 
