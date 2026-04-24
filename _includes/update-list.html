@@ -1,0 +1,43 @@
+{% assign MAX_SIZE = 5 %}
+{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
+
+{% comment %} 
+  Wir erzwingen die Überschrift außerhalb jeder Bedingung, 
+  damit sie IMMER da ist, egal ob Posts gefunden werden oder nicht.
+{% endcomment %}
+<section id="access-lastmod">
+  <h2 class="panel-heading">
+    {% if site.data.locales[current_lang].panel.lastmod %}
+      {{ site.data.locales[current_lang].panel.lastmod }}
+    {% else %}
+      {% if current_lang == 'de' %}Kürzlich aktualisiert{% else %}Recently Updated{% endif %}
+    {% endif %}
+  </h2>
+
+  <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+    {% assign counter = 0 %}
+    
+    {% comment %} 
+      Wir loopen durch alle Posts und prüfen den Pfad und die Sprache
+    {% endcomment %}
+    {% for post in site.posts %}
+      {% capture post_path %}{{ post.path }}{% endcapture %}
+      {% assign lang_path = "/" | append: current_lang | append: "/" %}
+      
+      {% if post.lang == current_lang or post_path contains lang_path %}
+        {% if counter < MAX_SIZE %}
+          <li class="text-truncate lh-lg">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </li>
+          {% assign counter = counter | plus: 1 %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if counter == 0 %}
+      <li class="text-muted fst-italic shadow-none" style="font-size: 0.8rem;">
+        {% if current_lang == 'de' %}Keine Beiträge vorhanden{% else %}No posts available{% endif %}
+      </li>
+    {% endif %}
+  </ul>
+</section>

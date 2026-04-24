@@ -1,0 +1,38 @@
+{% assign current_lang = page.lang | default: site.active_lang | default: site.default_lang %}
+{% assign lang_path = "/" | append: current_lang | append: "/" %}
+
+<section id="panel-tags">
+  <h2 class="panel-heading">
+    {% if site.data.locales[current_lang].panel.trending_tags %}
+      {{ site.data.locales[current_lang].panel.trending_tags }}
+    {% else %}
+      {% if current_lang == 'de' %}Beliebte Tags{% else %}Trending Tags{% endif %}
+    {% endif %}
+  </h2>
+  
+  <div class="d-flex flex-wrap mt-3">
+    {% for tag in site.tags %}
+      {% assign tag_name = tag[0] %}
+      {% assign count = 0 %}
+      
+      {% comment %} 
+        Wir zählen nur Posts, die im richtigen Sprachordner liegen 
+        oder das richtige lang-Attribut haben.
+      {% endcomment %}
+      {% for post in site.posts %}
+        {% capture post_path %}{{ post.path }}{% endcapture %}
+        {% if post.lang == current_lang or post_path contains lang_path %}
+          {% if post.tags contains tag_name %}
+            {% assign count = count | plus: 1 %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      
+      {% if count > 0 %}
+        <a class="post-tag btn btn-outline-primary" href="{{ '/tags/' | relative_url }}{{ tag_name | slugify }}/">
+            {{ tag_name }}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>

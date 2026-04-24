@@ -11,4 +11,13 @@ platforms :windows, :jruby do
   gem "tzinfo-data"
 end
 
+group :jekyll_plugins do
+  gem "jekyll-polyglot"
+end
+
 gem "wdm", "~> 0.2.0", :platforms => [:windows]
+
+gem "erb", "~> 6.0"
+gem "base64", "~> 0.3.0"
+gem "bigdecimal", "~> 3.3"
+gem "mutex_m", "~> 0.3.0"
