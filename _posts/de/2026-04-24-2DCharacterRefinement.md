@@ -127,12 +127,40 @@ Dazu gibt es zum jetzigem stand keine Dokumentation. Vielleicht mache ich mal ei
 ---
 
 ## 4. Technische Umsetzung & Parameter
-Die folgenden Parameter wurden im Inspector gesetzt.
+### Coyote Time
 
 | Parameter | Beschreibung | Empfohlener Wert |
 | :--- | :--- | :--- |
-| `ParameterName` | Beschreibung | Wert |
+| `coyoteTimeDuration` | Wie lange der coyote timer sein soll in Sekunden | 0.15 |
 
+Zuerst müssen wir uns überlegen welche Variablen ein Coyote Time bruacht. 
+Die einmal einen Counter, und eine Duration. In diesem fall ist die Duration ein [SerializeField]("https://docs.unity3d.com/6000.3/Documentation/ScriptReference/SerializeField.html")
+
+```cs
+[Header("Coyote Time")]
+[SerializeField] private float coyoteTimeDuration = 0.15f;
+private float coyoteTimeCounter; 
+```
+
+In der Update() methode setzen wir dann einfach den Counter = Duration, wenn der Spieler den Ground berührt. wenn er das nicht tut, ziehen wir [Time.deltaTime;](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Time-deltaTime.html) vom Counter ab.
+
+```cs
+if (m_isGrounded)
+  coyoteTimeCounter = coyoteTimeDuration;
+else
+  coyoteTimeCounter -= Time.deltaTime;
+```
+
+Statt in der OnJump() methode zu prüfen ob der Spieler den boden berühert, prüfen wir ab jetzt ob der Counter kleiner oder gleich 0 ist. wenn, returnen wir. 
+Hat den simpelen grund, wenn der Spieler Auf dem Boden steht, dann ist der Counter immer auf den wert von der Duration gesetzt. Wenn der spieler fällt, dann zählz er runter, also wird er irgendwann unter den wert 0 fallen, wenn das passiert, ist der Timer abgelaufen und der Spieler kann nicht springen.
+
+```cs
+if (m_coyoteTimeCounter <= 0f) return;
+m_rb.linearVelocity = new Vector2(m_rb.linearVelocity.x, jumpForce);
+            
+m_coyoteTimeCounter = 0f;
+```
+Wichtig: am ende muss der Counter auf 0 gesetzt werden, um einen double jump zu vermeiden.
 
 ---
 
